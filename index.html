@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="My to-do list app">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My to-do list</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body class="body">
+    <h1 class="visually-hidden">To-do list</h1>
+    <div class="bg">
+      <div class="bg__image"></div>
+    </div>
+    <div class="wrapper">
+      <div class="content">
+        <div class="header">
+          <div class="logo"></div>
+          <input oninput="searchSubStr()" class="search" type="search" id="search" placeholder="🔍   Search task for to do">
+        </div>
+        <ul class="sorting" id="sorting">
+          <li onclick="viewAllTasks()" class="type" id="all">All</li>
+          <li onclick="viewActiveTasks()" class="type" id="active">Active</li>
+          <li onclick="viewDoneTasks()" class="type" id="done">Done</li>
+        </ul>
+        <div id="input-task-wrapper">
+          <p class="label">New Task</p>
+          <textarea class="new-task" name="New Task" id="new-task" placeholder="Please write a new task here..."></textarea>
+          <div class="btn-wrapper">
+            <button class="btn-add-task" id="add-task-btn">ADD</button>
+          </div>
+        </div>
+        <ul class="task-list" id="task-list">
+          <!-- Здесь будут динамически создаваться задачи -->
+        </ul>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
