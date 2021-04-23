@@ -26,12 +26,10 @@
           <li onclick="viewActiveTasks()" class="type" id="active">Active</li>
           <li onclick="viewDoneTasks()" class="type" id="done">Done</li>
         </ul>
-        <div id="input-task-wrapper">
-          <p class="label">New Task</p>
+        <div class="input-task-wrapper" id="input-task-wrapper">
+          <label for="new-task" class="label">New Task</label>
           <textarea class="new-task" name="New Task" id="new-task" placeholder="Please write a new task here..."></textarea>
-          <div class="btn-wrapper">
-            <button class="btn-add-task" id="add-task-btn">ADD</button>
-          </div>
+          <button class="btn-add-task" id="add-task-btn">ADD</button>
         </div>
         <ul class="task-list" id="task-list">
           <!-- Здесь будут динамически создаваться задачи -->

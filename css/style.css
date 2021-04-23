@@ -40,6 +40,7 @@ html {
   height: 735px;
   background: no-repeat right/contain url(../img/taking_notes.svg);
 }
+                                          /*Остальные стили*/
 .wrapper {
   max-width: 1440px;
   padding: 20px 40px 0;
@@ -67,7 +68,7 @@ html {
   border: 1px solid #E2E2E2;
   box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  outline-color: rgba(47, 128, 237, 0.7);
+  outline: none;
   transition: opacity 1s;
 }
 .search::placeholder {
@@ -100,6 +101,11 @@ html {
 .type:hover {
   cursor: pointer;
 }
+.input-task-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
 .label {
   margin-bottom: 3px;
   font-size: 12px;
@@ -114,19 +120,20 @@ html {
   height: 90px;
   border: 1px solid #DDDBDA;
   border-radius: 4px;
-  outline-color: rgba(47, 128, 237, 0.7);
+  outline: none;
+}
+.search:focus,
+.new-task:focus {
+  border-color: rgba(47, 128, 237, 0.8);
 }
 .new-task::placeholder {
-    opacity: 0;
+  opacity: 0;
 }
 .new-task--hidden {
   display: none;
 }
-.btn-wrapper {
-  text-align: right;
-  margin-bottom: 23px;
-}
 .btn-add-task {
+  align-self: flex-end;
   width: 190px;
   height: 36px;
   font-weight: 500;
@@ -158,6 +165,7 @@ html {
 .task__text {
   width: 444px;
   height: 78px;
+  padding: 5px;
   word-wrap: break-word;
   overflow: auto;
   align-items: center;
@@ -227,10 +235,10 @@ html {
 }
 @media (pointer: coarse) and
         (orientation: landscape) and
-        (max-width: 1366px) {/*iPAD pro*/
+        (max-width: 1366px) {/*big tablets*/
   .bg__image {
     position: fixed;
-    top: 25vmin;
+    top: 20vmin;
     height: 74vmin;
   }
 }
@@ -239,16 +247,16 @@ html {
         (max-height: 1366px) {
   .bg__image {
     position: fixed;
-    top: 50vmin;
+    top: 45vmin;
     width: 97vmin;
     height: 77vmin;
   }
 }
 @media (pointer: coarse) and
         (orientation: landscape) and
-        (max-width: 1024px) {/*iPAD*/
+        (max-width: 1024px) {/*mid tablets*/
   .bg__image {
-    top: 35vmin;
+    top: 30vmin;
     height: 60vmin;
   }
   .task__btns-wrapper {
@@ -262,7 +270,7 @@ html {
         (max-width: 768px),
         (max-height: 480px){/*iPad portrait and other tablets*/
   .bg__image {
-    top: 50vmin;
+    top: 45vmin;
     width: 97vmin;
     height: 77vmin;
   }
@@ -332,7 +340,7 @@ html {
         (orientation: landscape) and
         (max-width: 768px) {/*other tablets*/
   .bg__image {
-    top: 39vmin;
+    top: 30vmin;
     left: 0;
     width: 97vmin;
     height: 60vmin;
@@ -355,8 +363,24 @@ html {
     height: 38px;
     margin: 0;
   }
+  .sorting {
+    margin-bottom: 16px;
+  }
+  .input-task-wrapper {
+    flex-direction: row;
+    margin-bottom: 10px;
+  }
   .new-task {
-    height: 50px;
+    flex-grow: 1;
+    height: 60px;
+    font-size: 14px;
+    margin-right: 16px;
+  }
+  .btn-add-task {
+    align-self: flex-start;
+    width: 100px;
+    height: 60px;
+    border-radius: 4px;
   }
   .task {
     height: 70px;
@@ -375,11 +399,15 @@ html {
         (orientation: portrait) and
         (max-width: 480px) {
   .bg__image {
-    top: 55vh;
+    top: 53vh;
   }
   .logo {
     height: 38px;
     background: no-repeat center/contain url(../img/logo.svg);
+  }
+  .new-task {
+    padding: 10px 14px;
+    font-size: 14px;
   }
 }
                               /*Desktop: мониторы с разрешением до 1600x900*/
@@ -387,15 +415,8 @@ html {
         (max-width: 1600px) and
         (max-height: 900px) {
   .bg__image {
-    top: 14vmin;
-    right: 1%;
-  }
-}
-@media (hover) and
-        (max-width: 1366px) and
-        (max-height: 768px) {
-  .bg__image {
-    top: 15vmin;
-    height: 80vmin;
+    top: 25vmin;
+    height: 65vmin;
+    right: 5vw;
   }
 }
