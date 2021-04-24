@@ -93,7 +93,6 @@ html {
   opacity: 0.5;
   text-align: center;
   border-top: 4px solid rgba(255, 255, 255, 0);
-  transition: 0.4s;
 }
 .type:hover {
   cursor: pointer;
