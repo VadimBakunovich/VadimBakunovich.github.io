@@ -236,6 +236,9 @@ button {
 }
                                           /*Адаптив*/
 @media (pointer: coarse){ /*Mobile: делаем видимыми кнопки в задачах*/
+  button {
+    outline: none;
+  }
   .task__btn-important,
   .task__btn-del {
     opacity: 1;
