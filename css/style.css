@@ -351,8 +351,8 @@ html {
         (max-height: 480px) {/*Phones*/
   .bg__image {
     top: 30vmin;
-    left: 0;
-    width: 97vmin;
+    left: 100px;
+    width: 75vmin;
     height: 60vmin;
   }
   .header {
