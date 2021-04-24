@@ -1,13 +1,12 @@
-const addTaskBtn = document.getElementById('add-task-btn');
-const inputTask = document.getElementById('new-task');
-const inputTaskWrap = document.getElementById('input-task-wrapper');
-const tasksWrapper = document.getElementById('task-list');
-const allButtonsImportant = document.querySelectorAll('.task__btn-important');
-const typeTaskAll = document.getElementById('all');
-const typeTaskActive = document.getElementById('active');
-const typeTaskDone = document.getElementById('done');
-const searchInput = document.getElementById('search');
-let disable = '';
+const addTaskBtn = document.getElementById('add-task-btn'),
+      inputTask = document.getElementById('new-task'),
+      inputTaskWrap = document.getElementById('input-task-wrapper'),
+      tasksWrapper = document.getElementById('task-list'),
+      allButtonsImportant = document.querySelectorAll('.task__btn-important'),
+      typeTaskAll = document.getElementById('all'),
+      typeTaskActive = document.getElementById('active'),
+      typeTaskDone = document.getElementById('done'),
+      searchInput = document.getElementById('search');
 
 let tasks = [];
 !localStorage.tasks ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -86,23 +85,27 @@ const markTaskImportant = (index) => {
 };
 
 addTaskBtn.addEventListener('click', () => {
-  if (inputTask.value.length != 0) tasks.push(new Task(inputTask.value));
-  updLocalStor();
-  if (typeTaskActive.matches('.type--selected')) viewActiveTasks()
-  else viewAllTasks();
-  inputTask.value = '';
-  document.getElementById("search").disabled = false;
-});
-
-inputTask.addEventListener('keydown', function(event) {
-  if (event.key === "Enter") {
-    if (inputTask.value.length != 0) tasks.push(new Task(inputTask.value));
+  if (inputTask.value.length != 0) {
+    tasks.push(new Task(inputTask.value));
     updLocalStor();
     if (typeTaskActive.matches('.type--selected')) viewActiveTasks()
     else viewAllTasks();
     inputTask.value = '';
-    event.preventDefault();
-    document.getElementById("search").disabled = false;
+    searchInput.disabled = false;
+  };
+});
+
+inputTask.addEventListener('keydown', function(event) {
+  if (event.key === "Enter") {
+    if (inputTask.value.length != 0) {
+      tasks.push(new Task(inputTask.value));
+      updLocalStor();
+      if (typeTaskActive.matches('.type--selected')) viewActiveTasks()
+      else viewAllTasks();
+      inputTask.value = '';
+      event.preventDefault();
+      searchInput.disabled = false;
+    };
   };
 });
 
@@ -114,7 +117,7 @@ const delTask = (index) => {
     typeTaskActive.classList.remove('type--selected');
     typeTaskDone.classList.remove('type--selected');
     inputTaskWrap.classList.remove('new-task--hidden');
-    document.getElementById("search").disabled = true;
+    searchInput.disabled = true;
   };
   fillToDoList();
 };
@@ -128,7 +131,7 @@ const viewAllTasks = () => {
     inputTaskWrap.classList.remove('new-task--hidden');
     fillToDoList();
   }
-  else document.getElementById("search").disabled = true;
+  else searchInput.disabled = true;
   searchInput.value = '';
 };
 
