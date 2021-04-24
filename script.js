@@ -129,6 +129,7 @@ const viewAllTasks = () => {
     fillToDoList();
   }
   else document.getElementById("search").disabled = true;
+  searchInput.value = '';
 };
 
 const viewActiveTasks = () => {
@@ -143,6 +144,7 @@ const viewActiveTasks = () => {
     inputTaskWrap.classList.remove('new-task--hidden');
     fillToDoList();
   };
+  searchInput.value = '';
 };
 
 const viewDoneTasks = () => {
@@ -157,6 +159,7 @@ const viewDoneTasks = () => {
     inputTaskWrap.classList.add('new-task--hidden');
     fillToDoList();
   };
+  searchInput.value = '';
 };
 
 const searchSubStr = () => {
@@ -181,5 +184,5 @@ const searchSubStr = () => {
   };
   fillToDoList();
 };
-//document.addEventListener("DOMContentLoaded", viewAllTasks());
+
 viewAllTasks();
