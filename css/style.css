@@ -17,6 +17,12 @@ html {
   line-height: 19px;
   color: #53565A;
 }
+button {
+  color: #53565A;
+  border: none;
+  background-color: transparent;
+  outline-color: rgba(47, 128, 237, 0.8);
+}
                                           /*прячем заголовок*/
 .visually-hidden {
   position: absolute;
@@ -139,9 +145,10 @@ html {
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
+  letter-spacing: 0.75px;
   color: #FFF;
   background: #2F80ED;
-  border: none;
+  outline-color: #706E6B;
   cursor: pointer;
 }
 .task-list {
@@ -203,6 +210,7 @@ html {
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
+  letter-spacing: 0.75px;
   color: #fff;
   text-align: center;
 }
@@ -231,6 +239,7 @@ html {
   .task__btn-important,
   .task__btn-del {
     opacity: 1;
+    letter-spacing: normal;
   }
 }
 @media (pointer: coarse) and

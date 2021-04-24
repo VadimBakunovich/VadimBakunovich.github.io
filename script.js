@@ -7,12 +7,13 @@ const addTaskBtn = document.getElementById('add-task-btn'),
       typeTaskActive = document.getElementById('active'),
       typeTaskDone = document.getElementById('done'),
       searchInput = document.getElementById('search');
-
+// Объявляем массив объектов(наши задачи)
 let tasks = [];
+// При загрузке страницы проверяем, если массив существует в localStorage, то заполняем его элементами наш tasks
 !localStorage.tasks ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'));
-
+// Объявляем массив, элементами которого будут DOM-элементы с классом '.task'
 let toDoListItems = [];
-
+// Объявляем функцию-конструктор объекта(нашей задачи)
 function Task(descr) {
   this.descr = descr;
   this.completed = false;
@@ -21,19 +22,20 @@ function Task(descr) {
   this.importantBtnText = 'MARK IMPORTANT';
   this.display = '';
 };
-
+// Объявляем функцию создания шаблона нашей задачи в html
+// Используем шаблонные литералы и интерполяцию выражений
 const createTemplate = (task, index) => {
   return `
     <li ${task.display} class="task">
       <p onclick="completeTask(${index})" class="task__text ${task.completed ? 'task__text--completed' : ''} ${task.important ? 'task__text--important' : ''}">${task.descr}</p>
       <div class="task__btns-wrapper">
-        <button ${task.btnImportant} onclick="markTaskImportant(${index})" class="task__btn-important ${task.important ? 'task__btn-important--true' : 'task__btn-important--false'}">${task.importantBtnText}</button>
-        <button onclick="delTask(${index})"class="task__btn-del"></button>
+        <button type="button" ${task.btnImportant} onclick="markTaskImportant(${index})" class="task__btn-important ${task.important ? 'task__btn-important--true' : 'task__btn-important--false'}">${task.importantBtnText}</button>
+        <button type="button" onclick="delTask(${index})"class="task__btn-del"></button>
       </div>
     </li>
   `
 };
-
+// Объявляем функцию наполнения html-страницы нашими задачами
 const fillToDoList = () => {
   tasksWrapper.innerHTML = "";
   if (tasks.length > 0) {
@@ -43,11 +45,36 @@ const fillToDoList = () => {
     toDoListItems = document.querySelectorAll('.task');
   };
 };
-
+// Объявляем функцию обновления LocalStorage
 const updLocalStor = () => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 };
-
+// С помощью метода addEventListener() добаляем текст нашей задачи на страницу (по кнопке "ADD")
+addTaskBtn.addEventListener('click', () => {
+  if (inputTask.value.length != 0) {
+    tasks.push(new Task(inputTask.value));
+    updLocalStor();
+    if (typeTaskActive.matches('.type--selected')) viewActiveTasks()
+    else viewAllTasks();
+    inputTask.value = '';
+    searchInput.disabled = false;
+  };
+});
+// С помощью метода addEventListener() добаляем текст нашей задачи на страницу (по кнопке "Enter")
+inputTask.addEventListener('keydown', function(event) {
+  if (event.key === "Enter") {
+    if (inputTask.value.length != 0) {
+      tasks.push(new Task(inputTask.value));
+      updLocalStor();
+      if (typeTaskActive.matches('.type--selected')) viewActiveTasks()
+      else viewAllTasks();
+      inputTask.value = '';
+      event.preventDefault();
+      searchInput.disabled = false;
+    };
+  };
+});
+// Объявляем функцию-обработчик, когда задача выполнена
 const completeTask = (index) => {
   tasks[index].completed = !tasks[index].completed;
   if (tasks[index].completed) {
@@ -67,7 +94,7 @@ const completeTask = (index) => {
   updLocalStor();
   fillToDoList();
 };
-
+// Объявляем функцию-обработчик, когда меняется важность задачи
 const markTaskImportant = (index) => {
   tasks[index].important = !tasks[index].important;
   if (tasks[index].important) {
@@ -83,32 +110,7 @@ const markTaskImportant = (index) => {
   updLocalStor();
   fillToDoList();
 };
-
-addTaskBtn.addEventListener('click', () => {
-  if (inputTask.value.length != 0) {
-    tasks.push(new Task(inputTask.value));
-    updLocalStor();
-    if (typeTaskActive.matches('.type--selected')) viewActiveTasks()
-    else viewAllTasks();
-    inputTask.value = '';
-    searchInput.disabled = false;
-  };
-});
-
-inputTask.addEventListener('keydown', function(event) {
-  if (event.key === "Enter") {
-    if (inputTask.value.length != 0) {
-      tasks.push(new Task(inputTask.value));
-      updLocalStor();
-      if (typeTaskActive.matches('.type--selected')) viewActiveTasks()
-      else viewAllTasks();
-      inputTask.value = '';
-      event.preventDefault();
-      searchInput.disabled = false;
-    };
-  };
-});
-
+// Объявляем функцию-обработчик, когда задача удаляется
 const delTask = (index) => {
   tasks.splice(index, 1);
   updLocalStor();
@@ -121,7 +123,7 @@ const delTask = (index) => {
   };
   fillToDoList();
 };
-
+// Объявляем функцию отображения всех задач
 const viewAllTasks = () => {
   if (tasks.length > 0) {
     tasks.forEach((item) => item.display = '');
@@ -134,7 +136,7 @@ const viewAllTasks = () => {
   else searchInput.disabled = true;
   searchInput.value = '';
 };
-
+// Объявляем функцию отображения активных задач
 const viewActiveTasks = () => {
   if (tasks.length > 0) {
     tasks.forEach((item) => {
@@ -149,7 +151,7 @@ const viewActiveTasks = () => {
   };
   searchInput.value = '';
 };
-
+// Объявляем функцию отображения выполненных задач
 const viewDoneTasks = () => {
   if (tasks.length > 0) {
     tasks.forEach((item) => {
@@ -164,7 +166,7 @@ const viewDoneTasks = () => {
   };
   searchInput.value = '';
 };
-
+// Объявляем функцию поиска в задачах
 const searchSubStr = () => {
   let subStr = searchInput.value;
   if (typeTaskActive.matches('.type--selected')) {
@@ -187,5 +189,5 @@ const searchSubStr = () => {
   };
   fillToDoList();
 };
-
+// Вызываем функцию отображения всех задач на странице
 viewAllTasks();
