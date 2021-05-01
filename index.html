@@ -22,14 +22,14 @@
           <input oninput="searchSubStr()" class="search" type="search" id="search" placeholder="🔍   Search task for to do">
         </div>
         <div class="sorting">
-          <button type="button" onclick="viewAllTasks()" class="type" id="all">All</button>
-          <button type="button" onclick="viewActiveTasks()" class="type" id="active">Active</button>
-          <button type="button" onclick="viewDoneTasks()" class="type" id="done">Done</button>
+          <button type="button" class="type" id="all">All</button>
+          <button type="button" class="type" id="active">Active</button>
+          <button type="button" class="type" id="done">Done</button>
         </div>
         <div class="input-task-wrapper" id="input-task-wrapper">
           <label for="new-task" class="label">New Task</label>
-          <textarea class="new-task" name="New Task" id="new-task" placeholder="Please write a new task here..."></textarea>
-          <button type="button" class="btn-add-task" id="add-task-btn">ADD</button>
+          <textarea class="new-task" id="new-task" maxlength="150" placeholder="Please write a new task here..."></textarea>
+          <button type="button" class="btn-add-task">ADD</button>
         </div>
         <ul class="task-list" id="task-list">
           <!-- Здесь будут динамически создаваться задачи -->
