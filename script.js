@@ -37,9 +37,7 @@ const createTemplate = (task, index) =>
 const fillToDoList = () => {
   tasksWrapper.innerHTML = "";
   if (tasks.length) {
-    tasks.forEach((item, index) => {
-      tasksWrapper.innerHTML += createTemplate(item, index);
-    });
+    tasks.forEach((item, index) => tasksWrapper.innerHTML += createTemplate(item, index));
     toDoListItems = document.querySelectorAll('.task');
   }
 };
@@ -111,8 +109,7 @@ const taskSorting = (target) => {
 const tabsHandler = (target) => {
   if (tasks.length) {
     for (tab of tabs) {
-      if (tab.id === target.id) taskSorting(target);
-      else tab.classList.remove('type--selected');
+      tab.id === target.id ? taskSorting(target) : tab.classList.remove('type--selected');
       if (tab.id === target.id && tab.id === 'done') inputTaskWrap.classList.add('new-task--hidden');
       else inputTaskWrap.classList.remove('new-task--hidden');
     }
@@ -123,21 +120,16 @@ const btnAddTaskHandler = () => {
   if (inputTask.value.length) {
     tasks.unshift(new Task(inputTask.value));
     updLocalStor();
-    if (typeTaskActive.matches('.type--selected')) viewActiveTasks();
-    else viewAllTasks();
+    typeTaskActive.matches('.type--selected') ? viewActiveTasks() : viewAllTasks();
     inputTask.value = '';
     searchInput.disabled = false;
   }
 };
 
-const onclickHandler = (target) => {
-  if (target.className === 'type') tabsHandler(target);
-  if (target.className === 'btn-add-task') btnAddTaskHandler();
-};
-
 content.addEventListener('click', (event) => {
   let target = event.target;
-  onclickHandler(target);
+  if (target.className === 'type') tabsHandler(target);
+  if (target.className === 'btn-add-task') btnAddTaskHandler();
 });
 
 inputTask.addEventListener('keydown', function(event) {
@@ -145,8 +137,7 @@ inputTask.addEventListener('keydown', function(event) {
     if (inputTask.value.length) {
       tasks.unshift(new Task(inputTask.value));
       updLocalStor();
-      if (typeTaskActive.matches('.type--selected')) viewActiveTasks()
-      else viewAllTasks();
+      typeTaskActive.matches('.type--selected') ? viewActiveTasks() : viewAllTasks();
       inputTask.value = '';
       event.preventDefault();
       searchInput.disabled = false;
